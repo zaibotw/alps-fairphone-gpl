@@ -8,7 +8,7 @@
 # Using GCC
 ###################################################################
 
-CROSS_COMPILE = arm-linux-androideabi-
+CROSS_COMPILE = arm-eabi-
 
 AS	= $(CROSS_COMPILE)as
 LD	= $(CROSS_COMPILE)ld

@@ -195,7 +195,7 @@ export KBUILD_BUILDHOST := $(SUBARCH)
 #ARCH		?= $(SUBARCH)
 #CROSS_COMPILE	?= $(CONFIG_CROSS_COMPILE:"%"=%)
 ARCH		?= arm
-CROSS_COMPILE	?= arm-linux-androideabi-
+CROSS_COMPILE	?= arm-eabi-
 
 # Architecture as present in compile.h
 UTS_MACHINE 	:= $(ARCH)
@@ -379,7 +379,7 @@ KBUILD_CFLAGS_MODULE  := -DMODULE
 KBUILD_LDFLAGS_MODULE := -T $(srctree)/scripts/module-common.lds
 
 -include $(srctree)/$(MTK_PROJECT)_mtk_cust.mak
-MTK_INC += -I$(MTK_ROOT_CUSTOM)/$(MTK_PROJECT)/common
+MTK_INC += -I$(MTK_ROOT_CUSTOM)/$(TARGET_PRODUCT)/common
 LINUXINCLUDE	+= $(MTK_INC)
 KBUILD_CFLAGS	+= $(MTK_CFLAGS) $(MTK_CDEFS)
 KBUILD_CPPFLAGS	+= $(MTK_CPPFLAGS) $(MTK_CPPDEFS)

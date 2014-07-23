@@ -457,7 +457,7 @@ class GccCheck(object):
 # end GccCheck
 
 class EabiCheck(object):
-    """ check the requirement for arm-linux-androideabi-gcc compiler """
+    """ check the requirement for arm-eabi-gcc compiler """
     def __init__(self):
         self.flag = "FAIL"
         self.tag = True
@@ -469,24 +469,24 @@ class EabiCheck(object):
             self.checkEabiVersion()
 
     def checkInstall(self):
-        returnCode,self.eabigcc = commands.getstatusoutput("which arm-linux-androideabi-gcc")
+        returnCode,self.eabigcc = commands.getstatusoutput("which arm-eabi-gcc")
         if returnCode != 0:
-            self.info = "you have not installed arm-linux-androideabi-gcc"
+            self.info = "you have not installed arm-eabi-gcc"
             self.tag = False
-            result("arm-linux-androideabi-gcc","","",self.flag,self.info)
+            result("arm-eabi-gcc","","",self.flag,self.info)
             global checkResult
             checkResult = 1
 
     def checkEabiVersion(self):
         eabiVersion = commands.getoutput("%s --version" % self.eabigcc)
-        pattern = re.compile("arm-linux-androideabi-gcc.*?([\d\.]+)",re.S)
+        pattern = re.compile("arm-eabi-gcc.*?([\d\.]+)",re.S)
         match = pattern.match(eabiVersion)
         if match:
             self.versionNo = match.group(1)
             number = self.versionNo.split(".")
             if int(number[0]) < 4 \
                or (int(number[0]) == 4 and int(number[1]) != 6): 
-                self.info = "your arm-linux-androideabi-gcc version is not recommendation"
+                self.info = "your arm-eabi-gcc version is not recommendation"
             elif int(number[0]) == 4 and int(number[1]) == 6:
                self.flag = "OK"
         else:
@@ -500,7 +500,7 @@ class EabiCheck(object):
         else:
             self.bit = "unknown"
             self.info += "Bit info:%s " % eabiBit
-        result("arm-linux-androideabi-gcc",self.versionNo,self.bit,self.flag,self.info)
+        result("arm-eabi-gcc",self.versionNo,self.bit,self.flag,self.info)
         if self.flag == "FAIL":
             global checkResult
             checkResult = 1
@@ -717,7 +717,7 @@ Build Environment Requirement
 *       make                       : GNU Make 3.81 or 3.82
 *       perl                       : Version 5.10.X
 *       python                     : Version 2.6.X
-*       arm-linux-androideabi-gcc  : Version 4.6.X
+*       arm-eabi-gcc  : Version 4.6.X
 *       gcc                        : Version 4.4.3
 *       jdk                        : Version 1.6.X
 *       bison                      : Version 2.4.X
